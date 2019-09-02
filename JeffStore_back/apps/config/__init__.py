@@ -9,19 +9,25 @@ from redis import StrictRedis
 
 
 class Config():
-    # 通用ip
-    host = '127.0.0.1'
+
+    MONGODB_HOST = '127.0.0.1'
+    REDIS_HOST = '127.0.0.1'
     # mongdb端口
-    mongodb_port = 27017
+    MONGODB_POST = 27017
     # redis_port
-    redis_port = '6379'
+    REDIS_PORT = '6379'
     # 配置mongodb对象
-    mongodb_client = MongoClient(host,mongodb_port)
+    mongodb_client = MongoClient(MONGODB_HOST,MONGODB_POST)
     # 配置mongodb集合对象
     collection = mongodb_client.JeffStore.stu
-    # 配置redis数据库对象
-    redis_client = StrictRedis(host='localhost', port=redis_port, db=0)
 
+    # mysql数据库配置信息
+    # 连接mysql数据库的配置
+    SQLALCHEMY_DATABASE_URI = "mysql://root:mysql@127.0.0.1:3306/jeff"
+    # 开启数据库跟踪模式
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    # 开启数据库自动提交功能
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
 class DevelopmentConfig():
     """开发模式的配置类"""
