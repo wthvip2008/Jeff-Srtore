@@ -34,3 +34,21 @@ live-server命令参数
 --host=ADDRESS - 选择要绑定的主机地址，默认值：IP env var或0.0.0.0（“任意地址”）
 ```
 
+
+
+# 后端启动
+
+### 1.新版FLASK终端启动
+
+```
+$ export FLASK_APP=helloworld
+$ flask run -h 0.0.0.0 -p 8000 绑定地址 端口
+ * Running on http://127.0.0.1:5000/
+```
+
+### 2.pycharm 启动
+
+```
+参照pycharm运行flask1.0版本.png
+```
+

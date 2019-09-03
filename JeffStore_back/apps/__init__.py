@@ -4,12 +4,12 @@ __author__: jack
 __date__:2019/9/1 14:28
 """
 from flask import Flask
-from JeffStore_back.apps.config import config_list
+from apps.config import config_list
 from flask_sqlalchemy import SQLAlchemy
 from redis import StrictRedis
 import logging
 from logging.handlers import RotatingFileHandler
-from JeffStore_back.apps.config import DevelopmentConfig
+from apps.config import DevelopmentConfig
 
 
 # 只是申明了db对象而已，并没有做真实的数据库初始化操作
@@ -83,7 +83,7 @@ def create_app(config_class):
 
 
     # 测试用的hellpworld
-    from JeffStore_back.apps.modules.helloworld import hello_bp
+    from apps.modules.helloworld import hello_bp
     app.register_blueprint(hello_bp)
 
 

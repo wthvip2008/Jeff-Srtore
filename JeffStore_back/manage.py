@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # 添加导包路径
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-from JeffStore_back.apps import create_app
+from apps import create_app
 
 
 app = create_app("development")
