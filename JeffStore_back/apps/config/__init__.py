@@ -29,14 +29,15 @@ class Config():
     # 开启数据库自动提交功能
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
-class DevelopmentConfig():
+
+class DevelopmentConfig(Config):
     """开发模式的配置类"""
     DEBUG = True
     # 设置日志的级别
     LOG_LEVEL = logging.DEBUG
 
 
-class ProductionConfig():
+class ProductionConfig(Config):
     """线上模式的配置类"""
 
     DEBUG = False

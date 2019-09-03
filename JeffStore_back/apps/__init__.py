@@ -4,11 +4,13 @@ __author__: jack
 __date__:2019/9/1 14:28
 """
 from flask import Flask
-from apps.config import config_list
+from JeffStore_back.apps.config import config_list
 from flask_sqlalchemy import SQLAlchemy
 from redis import StrictRedis
 import logging
 from logging.handlers import RotatingFileHandler
+from JeffStore_back.apps.config import DevelopmentConfig
+
 
 # 只是申明了db对象而已，并没有做真实的数据库初始化操作
 db = SQLAlchemy()
@@ -53,7 +55,7 @@ def get_logger(config_class):
     return logger
 
 # 提供个日志对象，方式全局使用
-logger = get_logger()
+logger = get_logger(DevelopmentConfig)
 
 def create_app(config_class):
     """
@@ -67,21 +69,21 @@ def create_app(config_class):
     app.config.from_object(config)
 
     # 记录日志
-    get_logger(config_class)
+    get_logger(config)
 
     # 创建mysql数据库对象:延迟加载，懒加载思想，当app有值的时候才进行真正的初始化操作
     db.init_app(app)
     # 3.创建redis数据库对象(懒加载的思想)
     global redis_store
-    redis_store = StrictRedis(host=config_class.REDIS_HOST,
-                              port=config_class.REDIS_PORT,
+    redis_store = StrictRedis(host=config.REDIS_HOST,
+                              port=config.REDIS_PORT,
                               decode_responses=True
                               )
     """redis_store.set("age", 18)  ---->默认存储到redis ---0号数据库"""
 
 
     # 测试用的hellpworld
-    from apps.modules.helloworld import hello_bp
+    from JeffStore_back.apps.modules.helloworld import hello_bp
     app.register_blueprint(hello_bp)
 
 
